@@ -18,7 +18,10 @@ code. For example, in a `.babelrc` file:
 
 ```json
 {
-  "plugins": { "which-builtins" }
+  "plugins": [
+    ... // other plugins
+    "which-builtins"
+  ]
 }
 ```
 
