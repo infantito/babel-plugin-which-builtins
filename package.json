@@ -1,12 +1,12 @@
 {
   "name": "babel-plugin-which-builtins",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "eslint --quiet *.js && jest"
   },
-  "author": "Sasha Aickin",
+  "author": "Daniel Infante",
   "license": "UNLICENSED",
   "devDependencies": {
     "babel-core": "^6.20.0",

@@ -1,3 +1,5 @@
+// https://github.com/aickin/babel-plugin-which-builtins
+// https://www.npmjs.com/package/babel-plugin-which-builtins
 const alwaysInclude = [
   'core-js/modules/es6.array.iterator',
 ];
@@ -136,9 +138,10 @@ function handleStaticPropertyAccess(objectName, propertyName, builtins) {
 function handleInstancePropertyAccess(propertyName, builtins) {
   const localBuiltins = builtins;
   if (instanceMethods[propertyName]) {
-    // this is **potentially** a use of an ES2015/2016/2017/2017 instance method.
+    // this is **potentially** a use of an ES2015/2016/2017/2018 instance method.
     // include that instance method's polyfill in case.
-    instanceMethods[propertyName].forEach((module) => {
+
+    Array.isArray(instanceMethods[propertyName]) && instanceMethods[propertyName].forEach((module) => {
       localBuiltins[module] = true;
     });
   }
@@ -196,7 +199,7 @@ function whichBuiltinsPlugin({ types: t }) {
       },
 
       MemberExpression(path) {
-        const object = path.node.object;
+        const { object } = path.node;
 
         let propertyName = null;
         if (!path.node.computed && t.isIdentifier(path.node.property)) {
